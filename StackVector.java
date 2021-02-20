@@ -1,8 +1,8 @@
 import java.util.Vector;
 
 /**
- * @author moise
- *
+ * @author Luis Santos
+ * @author Diego Cordova
  */
 public class StackVector<E> extends Stack<E> {
     private Vector<E> datos;

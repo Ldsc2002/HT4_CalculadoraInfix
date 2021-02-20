@@ -1,15 +1,16 @@
-
-import java.util.LinkedList;
-
 /**
- * @author moise
- *
+ * Implementa el stack con un ArrayList
+ * @author Luis Santos
+ * @author Diego Cordova
  */
-public class StackList<E> extends Stack<E> {
-	protected LinkedList<E> core;
+
+import java.util.ArrayList;
+
+public class StackArrayList<E> extends Stack<E> {
+    protected ArrayList<E> core;
 	
-	public StackList() {
-		core = new LinkedList<E>();
+	public StackArrayList() {
+		core = new ArrayList<E>();
 	}
 	
 	@Override
@@ -24,7 +25,7 @@ public class StackList<E> extends Stack<E> {
 
 	@Override
 	public E pop() {
-		return core.removeLast();
+		return core.remove(core.size() - 1);
 	}
 
 	@Override

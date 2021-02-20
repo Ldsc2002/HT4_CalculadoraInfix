@@ -17,7 +17,7 @@ public class Driver {
     /**
      * implementation of singletone design pattern, it can be only one instance of Calculadora while the program is running
      **/
-    private static iCalculadora calc = new Calculadora(); 
+    private static iCalculadora calc = Calculadora.getCalculadora(); 
     private static Scanner scan = new Scanner(System.in);
     
     /** 
@@ -45,7 +45,7 @@ public class Driver {
      */
     private static boolean input(int size){
 
-        print("\nEscoja una opcion:\n1. leer otro archivo\n2. Salir\n");
+        print("\nEscoja una opcion:\n1. Leer otro archivo\n2. Salir\n");
         while (true) { //Se repite hasta que se logre el return
 
             try { 
@@ -107,7 +107,7 @@ public class Driver {
             opcionStack = input("Que implementacion de stack quiere utilizar?\n1. Vector\n2. Linked List\n3. Double Linked List\n", 3);
             //TODO utilizar variable opcionstack para factory de stacks
             String file = input();
-            print("\nLEYENDO EL ARCHIVO: \"" + file + "\n");
+            print("\nLEYENDO EL ARCHIVO: " + file + "\n");
             print(calc.decode(file));
             menu = input(2);
         }

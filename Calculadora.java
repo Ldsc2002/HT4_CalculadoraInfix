@@ -10,7 +10,21 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Calculadora implements iCalculadora {
+    private static Calculadora calc = new Calculadora();
     
+    /**
+     * Constructor de la clase
+     * Solo permite que se instancia la clase dentro de la clase 
+     */
+    private Calculadora(){};
+
+    /**
+     * Devuelve la instancia de la calculadora
+     */
+    public static Calculadora getCalculadora() {
+        return calc;
+    }
+
     /**
      * Devuelve el resultado de una resta entre dos números
      * @param x El valor al que se le resta otro numero
@@ -67,12 +81,12 @@ public class Calculadora implements iCalculadora {
         Scanner archivo = new Scanner(System.in);
 
         try { //Intenta accesar el archivo
-            archivo = new Scanner(new File(file)); //Crea un scanner que lee el archivo
+            archivo = new Scanner(new File(file + ".txt")); //Crea un scanner que lee el archivo
         } catch(FileNotFoundException e) {
             return("Archivo no encontrado");
         }    
 
-        Stack<String> Lineas = new StackLi<String>();
+        StackList<String> Lineas = new StackList<String>();
         archivo.useDelimiter("\n"); //Separa los datos en el line break
 
         while(archivo.hasNext()) { //Mientras hayan más lineas
@@ -80,9 +94,9 @@ public class Calculadora implements iCalculadora {
             Lineas.push(x); //Añade el  archivo al stack
         }
 
-        Stack<String> LineasInverso = new Stack<String>();
+        StackList<String> LineasInverso = new StackList<String>();
 
-        while(!Lineas.empty()) { //Crea un stack inverso
+        while(!Lineas.isEmpty()) { //Crea un stack inverso
             LineasInverso.push(Lineas.pop());
         }
 
@@ -90,9 +104,9 @@ public class Calculadora implements iCalculadora {
 
         int operacionesRealizadas = 0;
 
-        while(LineasInverso.size() > 0) { //Se repite por cada linea de postfix
+        while(LineasInverso.count() > 0) { //Se repite por cada linea de postfix
             String Linea = LineasInverso.pop(); //Obtiene la operación a realizar
-            Stack<String> Datos = new Stack<String>();
+            StackList<String> Datos = new StackList<String>();
 
             Scanner scanLinea = new Scanner(Linea);
 
@@ -101,9 +115,9 @@ public class Calculadora implements iCalculadora {
                 Datos.push(x); //Añade el  dato al stack
             }
 
-            Stack<String> DatosInverso = new Stack<String>();
+            StackList<String> DatosInverso = new StackList<String>();
 
-            while(!Datos.empty()) { //Invierte el stack
+            while(!Datos.isEmpty()) { //Invierte el stack
                 DatosInverso.push(Datos.pop());
             }
 
@@ -125,18 +139,18 @@ public class Calculadora implements iCalculadora {
      * @return El resultado de todas las operaciones realizadas
      */
     @Override
-    public int operar(Stack Datos) {
+    public int operar(IStack Datos) {
         
 
-        if (Datos.size() == 0) { //Verifica si el stack esta vacío
+        if (Datos.count() == 0) { //Verifica si el stack esta vacío
             return 0;
         }
 
-        Stack<String> enOperacion = new Stack<String>(); 
+        StackList<String> enOperacion = new StackList<String>(); 
 
         System.out.println("\nOperaciones:");
 
-        while (!Datos.empty()) { //Mientras el stack no esta vacio
+        while (!Datos.isEmpty()) { //Mientras el stack no esta vacio
             String x = Datos.pop().toString(); //Último dato obtenido del stack
             int num1; //Primer número para la operación
             int num2; //Segundo número para la operación

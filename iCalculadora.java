@@ -22,7 +22,7 @@ public interface iCalculadora {
     // pre: Requiere dos numeros
     // post: Devuelve la división de dos numeros
 
-    public int operar(Stack x); 
+    public int operar(IStack x); 
     // pre: Requiere un stack con expresiones en formato postfix
     // post: Devuelve el resultado de las operaciones en el stack
 

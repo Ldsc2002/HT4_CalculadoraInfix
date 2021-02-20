@@ -5,50 +5,62 @@ import java.util.Vector;
  *
  */
 public class StackVector<E> extends Stack<E> {
+    private Vector<E> datos;
 
-	protected Vector<E> core;
-	protected int tail;
-	
-	public StackVector(int size) {
-		core = new Vector<E>(size);
-		tail = 0;
-	}
-	
-	@Override
-	public boolean push(E element) {
-		if (this.count() < core.size()) {
-			tail++;
-			core.insertElementAt(element, tail);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    /**
+     * Constructor de la clase
+     * Crea un nuevo Vector para almacenar los datos
+     */
+    public StackVector() {
+        datos = new Vector<E>();
+    }
 
-	@Override
-	public E peek() {
-		return core.get(tail);
-	}
+    /**
+     * Añade un nuevo elemento a la pila
+     * @param item Elemento a añadir a la pila
+     * @return Un boolean que indica que se realizo la operacion
+     */
+    @Override
+    public boolean push(E item) {
+        datos.add(item);
+        return true;     
+    }
 
-	@Override
-	public E pop() {
-		if (this.isEmpty()) {
-			return null;
-		} else {
-			E temp = core.get(tail);
-			tail--;
-			return temp;
-		}
-	}
 
-	@Override
-	public int count() {
-		return (tail + 1);
-	}
+    /**
+     * Devuelve el último elemento de la pila sin borrarlo
+     * @return El último elemento de la pila
+     */
+    @Override
+    public E peek() {
+        return(datos.get(datos.size() - 1));
+    }
 
-	@Override
-	public boolean isEmpty() {
-		return (tail == -1);
-	}
+    /**
+     * Revisa si la pila esta vacía
+     * @return Boolean que indica si está vacia la pila
+     */
+    @Override
+    public boolean isEmpty() {
+        return datos.isEmpty();
+    }
 
+    /**
+     * Devuelve el tamaño de la pila
+     * @return El tamaño de la pila
+     */
+    @Override
+    public int count() {
+        return datos.size();
+    }
+
+
+    /**
+     * Devuelve el ultimo elemento de la pila y lo elimina
+     * @return El último elemento de la pila
+     */
+    @Override
+    public E pop() {
+        return (datos.remove(datos.size() - 1));
+    }
 }

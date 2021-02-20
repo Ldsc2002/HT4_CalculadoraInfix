@@ -10,62 +10,59 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Calculadora implements iCalculadora {
+    
+    /**
+     * Devuelve el resultado de una resta entre dos números
+     * @param x El valor al que se le resta otro numero
+     * @param y El valor que se resta
+     * @return El resultado de la resta de X - Y
+     */
     @Override
     public int resta(int x, int y) {
-        /**
-         * Devuelve el resultado de una resta entre dos números
-         * @param x El valor al que se le resta otro numero
-         * @param y El valor que se resta
-         * @return El resultado de la resta de X - Y
-         */
-
         return (x - y);
     }
 
+    /**
+     * Devuelve el resultado de una suma entre dos números
+     * @param x El primero número a sumar
+     * @param y El segundo número a sumar
+     * @return El resultado de la suma de X + Y
+     */
     @Override
-    public int suma(int x, int y) {
-        /**
-         * Devuelve el resultado de una suma entre dos números
-         * @param x El primero número a sumar
-         * @param y El segundo número a sumar
-         * @return El resultado de la suma de X + Y
-         */
-
+    public int suma(int x, int y) {        
         return (x + y);
     }
 
+    /**
+     * Devuelve el resultado de una multiplicación entre dos números
+     * @param x El primer número a multiplicar
+     * @param y El segundo número a multiplicar
+     * @return El resultado de la multiplicación de X * Y
+     */
     @Override
     public int multiplicacion(int x, int y) {
-        /**
-         * Devuelve el resultado de una multiplicación entre dos números
-         * @param x El primer número a multiplicar
-         * @param y El segundo número a multiplicar
-         * @return El resultado de la multiplicación de X * Y
-         */
-
         return (x * y);
     }
 
+    /**
+     * Devuelve el resultado de una división entre dos números
+     * @param x el numero a dividir
+     * @param y El divisor
+     * @return El resultado de la división de X / Y
+     */
     @Override
     public int division(int x, int y) {
-        /**
-         * Devuelve el resultado de una división entre dos números
-         * @param x el numero a dividir
-         * @param y El divisor
-         * @return El resultado de la división de X / Y
-         */
-
         return (x / y);
     }
 
+    /**
+     * Devuelve un string con los resultados de las operaciones realizadas
+     * El resultado de cada operación es indicado en una nueva linea
+     * @param file El archivo a decidificar y operar
+     * @return Los resultados de las operaciones realizadas
+     */
     @Override
     public String decode(String file) {
-        /**
-         * Devuelve un string con los resultados de las operaciones realizadas
-         * El resultado de cada operación es indicado en una nueva linea
-         * @param file El archivo a decidificar y operar
-         * @return Los resultados de las operaciones realizadas
-         */
 
         Scanner archivo = new Scanner(System.in);
 
@@ -75,7 +72,7 @@ public class Calculadora implements iCalculadora {
             return("Archivo no encontrado");
         }    
 
-        Stack<String> Lineas = new Stack<String>();
+        Stack<String> Lineas = new StackLi<String>();
         archivo.useDelimiter("\n"); //Separa los datos en el line break
 
         while(archivo.hasNext()) { //Mientras hayan más lineas
@@ -122,13 +119,14 @@ public class Calculadora implements iCalculadora {
         return "\n" + result; //Devuelve el resultado
     }
 
+    /**
+     * Devuelve el resultado de las operaciones realizadas con un stack
+     * @param Datos Los datos a utilizar para las operaciones
+     * @return El resultado de todas las operaciones realizadas
+     */
     @Override
-    public int operar(iStack Datos) {
-        /**
-         * Devuelve el resultado de las operaciones realizadas con un stack
-         * @param Datos Los datos a utilizar para las operaciones
-         * @return El resultado de todas las operaciones realizadas
-         */
+    public int operar(Stack Datos) {
+        
 
         if (Datos.size() == 0) { //Verifica si el stack esta vacío
             return 0;

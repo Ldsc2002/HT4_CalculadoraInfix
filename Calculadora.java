@@ -11,12 +11,36 @@ import java.io.File;
 
 public class Calculadora implements iCalculadora {
     private static Calculadora calc = new Calculadora();
-    
+    private StackFactory sFactory = new StackFactory();
+    private String implementacion = "";
+
     /**
      * Constructor de la clase
      * Solo permite que se instancia la clase dentro de la clase 
      */
     private Calculadora(){};
+
+    /**
+     * Setter para la implementación del stack
+     * @param x El tipo de stack
+     * @return True si es un tipo válido, false de lo contrario
+     */
+    public boolean setImplementacion(int x){
+        switch (x) {
+            case 1:
+                implementacion = "Vector";
+                return true;
+            case 2:
+                implementacion = "List";
+                return true;
+            case 3:
+                implementacion = "ArrayList";
+                return true;
+        
+            default:
+                return false;
+        }
+    }
 
     /**
      * Devuelve la instancia de la calculadora
@@ -86,7 +110,7 @@ public class Calculadora implements iCalculadora {
             return("Archivo no encontrado");
         }    
 
-        StackList<String> Lineas = new StackList<String>();
+        Stack<String> Lineas = sFactory.getStack(implementacion);
         archivo.useDelimiter("\n"); //Separa los datos en el line break
 
         while(archivo.hasNext()) { //Mientras hayan más lineas
@@ -94,7 +118,7 @@ public class Calculadora implements iCalculadora {
             Lineas.push(x); //Añade el  archivo al stack
         }
 
-        StackList<String> LineasInverso = new StackList<String>();
+        Stack<String> LineasInverso = sFactory.getStack(implementacion);
 
         while(!Lineas.isEmpty()) { //Crea un stack inverso
             LineasInverso.push(Lineas.pop());
@@ -106,7 +130,7 @@ public class Calculadora implements iCalculadora {
 
         while(LineasInverso.count() > 0) { //Se repite por cada linea de postfix
             String Linea = LineasInverso.pop(); //Obtiene la operación a realizar
-            StackList<String> Datos = new StackList<String>();
+            Stack<String> Datos = sFactory.getStack(implementacion);
 
             Scanner scanLinea = new Scanner(Linea);
 
@@ -115,13 +139,13 @@ public class Calculadora implements iCalculadora {
                 Datos.push(x); //Añade el  dato al stack
             }
 
-            StackList<String> DatosInverso = new StackList<>();
+            Stack<String> DatosInverso = sFactory.getStack(implementacion);
 
             while(!Datos.isEmpty()) { //Invierte el stack
                 DatosInverso.push(Datos.pop());
             }
 
-            StackList<String> DatosPostfix = t.traducir(DatosInverso);
+            Stack<String> DatosPostfix = t.traducir(DatosInverso);
 
             scanLinea.close(); //Cierra el scanner
 
@@ -148,7 +172,7 @@ public class Calculadora implements iCalculadora {
             return 0;
         }
 
-        StackList<String> enOperacion = new StackList<String>(); 
+        Stack<String> enOperacion = sFactory.getStack(implementacion);; 
 
         System.out.println("\nOperaciones:");
 

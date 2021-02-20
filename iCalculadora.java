@@ -6,6 +6,10 @@
 */
 
 public interface iCalculadora {
+    public boolean setImplementacion(int x);
+    // pre: Requiere el tipo de implementación
+    // post: Devuelve true si el valor es válido
+
     public int suma(int x, int y); 
     // pre: Requiere dos numeros
     // post: Devuelve la suma de dos numeros

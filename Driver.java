@@ -102,10 +102,14 @@ public class Driver {
         print("Bienvenido a la caluladora Posfix UVG!!\n\n");
         int opcionStack;
         boolean menu = true;
+        boolean check = false;
 
         while (menu){
-            opcionStack = input("Que implementacion de stack quiere utilizar?\n1. Vector\n2. Linked List\n3. Double Linked List\n", 3);
-            //TODO utilizar variable opcionstack para factory de stacks
+            while(!check) {
+                opcionStack = input("Que implementacion de stack quiere utilizar?\n1. Vector\n2. List\n3. ArrayList\n", 3);
+                check = calc.setImplementacion(opcionStack);
+            }
+
             String file = input();
             print("\nLEYENDO EL ARCHIVO: " + file + "\n");
             print(calc.decode(file));

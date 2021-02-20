@@ -77,7 +77,7 @@ public class Calculadora implements iCalculadora {
      */
     @Override
     public String decode(String file) {
-
+        Traductor t = new Traductor();
         Scanner archivo = new Scanner(System.in);
 
         try { //Intenta accesar el archivo
@@ -115,15 +115,17 @@ public class Calculadora implements iCalculadora {
                 Datos.push(x); //Añade el  dato al stack
             }
 
-            StackList<String> DatosInverso = new StackList<String>();
+            StackList<String> DatosInverso = new StackList<>();
 
             while(!Datos.isEmpty()) { //Invierte el stack
                 DatosInverso.push(Datos.pop());
             }
 
+            StackList<String> DatosPostfix = t.traducir(DatosInverso);
+
             scanLinea.close(); //Cierra el scanner
 
-            int res = operar(DatosInverso); //Obtiene el resultado de la operación del stack
+            int res = operar(DatosPostfix); //Obtiene el resultado de la operación del stack
 
             operacionesRealizadas++;
             result = result + "Resultado operación " + operacionesRealizadas + ": " + Integer.toString(res) + "\n"; //Añade el resultado al string
@@ -173,9 +175,9 @@ public class Calculadora implements iCalculadora {
                     num1 = Integer.parseInt(enOperacion.pop());
                     num2 = Integer.parseInt(enOperacion.pop());
 
-                    res = num1 - num2;
+                    res = num2 - num1;
 
-                    System.out.println("Se realizó una resta de " + num1 + " - " + num2 + " con resultado " + res);
+                    System.out.println("Se realizó una resta de " + num2 + " - " + num1 + " con resultado " + res);
 
                     enOperacion.push(Integer.toString(res));
 
@@ -185,9 +187,9 @@ public class Calculadora implements iCalculadora {
                     num1 = Integer.parseInt(enOperacion.pop());
                     num2 = Integer.parseInt(enOperacion.pop());
 
-                    res = num1 / num2;
+                    res = num2 / num1;
 
-                    System.out.println("Se realizó una división de " + num1 + " / " + num2 + " con resultado " + res);
+                    System.out.println("Se realizó una división de " + num2 + " / " + num1 + " con resultado " + res);
 
                     enOperacion.push(Integer.toString(res));
 
